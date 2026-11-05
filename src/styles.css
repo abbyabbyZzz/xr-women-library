@@ -241,6 +241,20 @@ h2 { font-size: 21px; font-weight: 550; line-height: 1.4; letter-spacing: -.025e
 .not-found { padding-block: 100px; }
 .not-found h1 { font-size: 48px; margin-top: 16px; }
 .not-found p:not(.eyebrow) { margin-block: 20px; color: var(--color-text-secondary); }
+.about-main { padding-block: 60px 80px; }
+.about-heading { border-bottom: 1px solid var(--color-border); padding-bottom: 35px; }
+.about-heading h1 { font-size: 48px; margin-top: 14px; }
+.about-heading > p:last-child { color: var(--color-text-secondary); font-size: 16px; margin-top: 20px; }
+.about-layout { display: grid; grid-template-columns: minmax(0, 720px) minmax(240px, 300px); justify-content: space-between; gap: 64px; margin-top: 36px; align-items: start; }
+.about-article section + section { margin-top: 34px; }
+.about-article h2 { font-size: 20px; }
+.about-article p { font-size: 16px; color: var(--color-text-secondary); line-height: 1.85; margin-top: 13px; }
+.about-article > .button { margin-top: 32px; }
+.about-note { padding: 27px; background: var(--color-lavender); border-radius: var(--radius-md); }
+.about-note > svg { color: var(--color-primary); margin-bottom: 23px; }
+.about-note dt { font-size: 11px; color: var(--color-text-secondary); margin-top: 19px; }
+.about-note dd { margin: 4px 0 0; font-size: 14px; }
+.about-note .text-button { margin-top: 18px; }
 @media (min-width: 1500px) { .home-content { padding-top: 110px; padding-bottom: 90px; } }
 @media (max-width: 1100px) {
   .brand { gap: 9px; }
@@ -263,6 +277,8 @@ h2 { font-size: 21px; font-weight: 550; line-height: 1.4; letter-spacing: -.025e
   .brand-divider { margin-inline: 1px; }
   .site-header nav { gap: 18px; }
   .brand-subtitle { max-width: 65px; white-space: normal; line-height: 1.4; }
+  .about-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .about-note { max-width: 720px; }
 }
 @media (max-width: 767px) {
   .container { width: calc(100% - 40px); }
@@ -372,6 +388,10 @@ h2 { font-size: 21px; font-weight: 550; line-height: 1.4; letter-spacing: -.025e
   .related-list { grid-template-columns: 1fr; margin-top: 12px; }
   .related-list h3 { font-size: 22px; }
   .not-found { padding-block: 60px; }
+  .about-main { padding-block: 38px 50px; }
+  .about-heading h1 { font-size: 36px; }
+  .about-heading > p:last-child { font-size: 15px; }
+  .about-layout { margin-top: 28px; }
 }
 @media (max-width: 370px) {
   .brand { gap: 7px; }

@@ -11,7 +11,7 @@ function Header() {
   const entryUrl = verifiedFrameUrl(virtualLibrary.worldUrl, virtualLibrary.worldUrlVerified);
   return <header className="site-header"><div className="container header-inner">
     <Link to="/" className="brand" aria-label="XR Women Research Library home"><BookOpen size={25} strokeWidth={1.4} aria-hidden="true" /><span className="brand-name">XR WOMEN</span><span className="brand-divider" /><span className="brand-subtitle">Research Library</span></Link>
-    <nav aria-label="Main navigation"><NavLink to="/" end>Home</NavLink><NavLink to="/papers">Browse papers</NavLink><a className="about-link" href="https://www.xrwomen.com/" target="_blank" rel="noopener noreferrer">About XR Women<ArrowUpRight size={14} aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span></a>{entryUrl ? <a href={entryUrl} target="_blank" rel="noopener noreferrer">Enter Virtual Library<ArrowUpRight size={14} aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span></a> : null}</nav>
+    <nav aria-label="Main navigation"><NavLink to="/" end>Home</NavLink><NavLink to="/papers">Browse papers</NavLink><NavLink to="/about">About project</NavLink>{entryUrl ? <a href={entryUrl} target="_blank" rel="noopener noreferrer">Enter Virtual Library<ArrowUpRight size={14} aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span></a> : null}</nav>
   </div></header>;
 }
 
@@ -108,6 +108,20 @@ function NotFound({ paper = false }: { paper?: boolean }) {
   return <main id="main-content" className="container not-found"><p className="eyebrow">Outside the collection</p><h1 tabIndex={-1}>{paper ? 'Paper not found' : 'Page not found'}</h1><p>{paper ? 'This paper is not in the current catalogue.' : 'This page is not part of the research library.'}</p><Link className="button primary" to="/papers">Browse the collection<ArrowRight size={17} aria-hidden="true" /></Link></main>;
 }
 
+function AboutProject() {
+  useEffect(() => { document.title = 'About the project · XR Women'; }, []);
+  return <main id="main-content" className="container about-main">
+    <header className="about-heading"><p className="eyebrow">About this library</p><h1 tabIndex={-1}>About the project</h1><p>A place to explore research on extended reality, gender, and inclusion.</p></header>
+    <div className="about-layout"><article className="about-article">
+      <section aria-labelledby="about-purpose"><h2 id="about-purpose">Research discovery, with context</h2><p>The XR Women Research Library is a digital catalogue and navigation companion to a virtual research library in FrameVR. It brings academic papers into one focused collection so visitors can search, read an overview, and follow connections between research topics.</p></section>
+      <section aria-labelledby="about-collection"><h2 id="about-collection">What’s in the collection</h2><p>The current collection contains {papers.length} papers exploring social VR, harassment and safety, gender identity, avatar embodiment, education, and inclusion. Each record presents its authors, year, abstract, summary, keywords, and original publication link.</p><p>Paper information follows the supplied academic catalogue. Original abstracts are preserved, and publication links lead to the corresponding sources.</p></section>
+      <section aria-labelledby="about-connections"><h2 id="about-connections">Following research connections</h2><p>Related papers are connected by shared standardized keywords and broader research topics. You can explore these connections through a small network or a readable list on each paper’s page. They indicate subject similarity, rather than citations or evidence of influence.</p></section>
+      <section aria-labelledby="about-virtual"><h2 id="about-virtual">From the catalogue to FrameVR</h2><p>Each paper has a dedicated space for its virtual-library placement. Verified world and paper-location links will appear as those locations are mapped. Until then, the paper page clearly shows “Location not yet mapped”.</p></section>
+      <Link className="button primary" to="/papers">Explore the collection<ArrowRight size={17} aria-hidden="true" /></Link>
+    </article><aside className="about-note"><BookOpen size={25} strokeWidth={1.3} aria-hidden="true" /><p className="eyebrow">Project at a glance</p><dl><dt>Collection</dt><dd>{papers.length} academic papers</dd><dt>Focus</dt><dd>XR, gender, safety, and inclusion</dd><dt>Virtual companion</dt><dd>FrameVR research library</dd><dt>Current stage</dt><dd>Interactive MVP</dd></dl><Link className="text-button" to="/">Start with a search<ArrowRight size={15} aria-hidden="true" /></Link></aside></div>
+  </main>;
+}
+
 export default function App() {
-  return <><a className="skip-link" href="#main-content">Skip to content</a><Header /><RouteFocus /><Routes><Route path="/" element={<Home />} /><Route path="/papers" element={<Catalogue />} /><Route path="/search" element={<Catalogue />} /><Route path="/papers/:id" element={<PaperDetail />} /><Route path="*" element={<NotFound />} /></Routes><Footer /></>;
+  return <><a className="skip-link" href="#main-content">Skip to content</a><Header /><RouteFocus /><Routes><Route path="/" element={<Home />} /><Route path="/papers" element={<Catalogue />} /><Route path="/search" element={<Catalogue />} /><Route path="/papers/:id" element={<PaperDetail />} /><Route path="/about" element={<AboutProject />} /><Route path="*" element={<NotFound />} /></Routes><Footer /></>;
 }

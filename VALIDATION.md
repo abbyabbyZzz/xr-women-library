@@ -21,3 +21,5 @@ Automated coverage in `tests/catalogue.test.ts` checks all six IDs and DOI URLs,
 DOI URLs match the authoritative catalogue. The Frontiers DOI was independently resolved to the matching paper. Several other publisher pages blocked or failed automated fetching, so their live availability was not fully verified. Source URLs were retained without substitution.
 
 Screenshots from the browser review are saved locally in `qa/home-desktop.jpg` and `qa/home-mobile.jpg`; the QA image directory is excluded from source publication. This is a functional MVP review, not a formal assistive-technology audit.
+
+Follow-up change: the header's About project link now routes to `/about` in the same tab, with no external URL or `target` attribute. Browser navigation to the project introduction was verified, including its collection and search links. A screenshot is saved locally as `qa/about-project.jpg`.

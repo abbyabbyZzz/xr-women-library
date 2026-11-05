@@ -1,6 +1,6 @@
 # XR Women Research Library
 
-A React + Vite + TypeScript frontend MVP. React Router manages the three pages; Lucide supplies interface icons. All catalogue search, filters, and connections run locally. Newsreader and Inter are bundled, so reading does not depend on Google Fonts.
+A React + Vite + TypeScript frontend MVP. React Router manages the catalogue and project pages; Lucide supplies interface icons. All catalogue search, filters, and connections run locally. Newsreader and Inter are bundled, so reading does not depend on Google Fonts.
 
 ## Run locally
 
@@ -27,6 +27,7 @@ The production output is `dist/`. A static host must serve `index.html` for unkn
 - `/papers`: live, accent-insensitive and case-insensitive search across titles, authors, abstracts, summaries, both keyword sets, and categories; five broader topics derived from standardized keywords; multiple topics match **all** selections; newest/oldest sorting; clear actions and no-results state.
 - `/papers/:id`: original metadata, source-preserved abstract, summary, both keyword sets, DOI links, related research in an interactive network or list, and FrameVR location information.
 - `/search` is an alias for the catalogue, matching the design reference's older route.
+- `/about`: an internal project introduction, linked from the **About project** navigation item. It explains the collection, topic connections, and FrameVR placement without opening an external site.
 
 The URL stores search (`q`), repeated topic filters (`topic`), and sorting (`sort=oldest`). Browser Back preserves these; the detail page's Back to search results link also preserves the originating view through related-paper navigation. A directly opened detail page returns to the full catalogue.
 
