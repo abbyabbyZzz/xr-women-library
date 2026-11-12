@@ -1,4 +1,4 @@
-import { createServer } from 'node:http';
+import { createServer, get } from 'node:http';
 import { randomBytes, timingSafeEqual } from 'node:crypto';
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -8,6 +8,23 @@ import { spawn } from 'node:child_process';
 import { createGitHubClient, defaultApiUrl, pagesUrl, repository } from './github.mjs';
 
 const directory = path.dirname(fileURLToPath(import.meta.url));
+function readRunningManager(port) {
+  return new Promise(resolve => {
+    const request = get(`http://127.0.0.1:${port}/manager/session`, { agent: false }, response => {
+      let body = '';
+      response.on('data', chunk => {
+        body += chunk;
+        if (body.length > 32768) { resolve(null); request.destroy(); }
+      });
+      response.on('end', () => {
+        try { resolve(response.statusCode === 200 ? JSON.parse(body) : null); } catch { resolve(null); }
+      });
+      response.on('error', () => resolve(null));
+    });
+    request.setTimeout(5000, () => { resolve(null); request.destroy(); });
+    request.on('error', () => resolve(null));
+  });
+}
 export function validateApiUrl(value) {
   let url;
   try { url = new URL(value); } catch { throw new Error('请输入完整的 HTTPS API 地址。'); }
@@ -124,7 +141,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   server.on('error', async error => {
     if (error.code === 'EADDRINUSE') {
       const url = `http://127.0.0.1:${port}/`;
-      const existing = await fetch(`${url}manager/session`, { signal: AbortSignal.timeout(2000) }).then(response => response.ok ? response.json() : null).catch(() => null);
+      const existing = await readRunningManager(port);
       if (existing?.repository === repository && existing?.pagesUrl === pagesUrl && typeof existing?.token === 'string') {
         console.log(`管理器已经在运行：${url}`);
         openBrowser(url);
