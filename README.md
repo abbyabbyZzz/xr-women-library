@@ -33,6 +33,8 @@ Website: https://abbyabbyzzz.github.io/xr-women-library/
 
 The Pages source is **GitHub Actions**. Pushing to `main` runs tests, builds the website, and publishes `dist/` using `.github/workflows/deploy-pages.yml`. The workflow gets its base path from GitHub Pages configuration. Common routes have generated entry pages; dynamic paper routes use the custom 404 entry and React Router. Such direct dynamic requests can have HTTP 404 status while the application loads normally.
 
+For a matching local preview, run `npm run build:pages` followed by `npm run preview:pages`, then open the printed URL including `/xr-women-library/`.
+
 `ZOTERO_API_URL` is an optional GitHub repository Actions variable containing only the public catalogue endpoint. It becomes `VITE_ZOTERO_API_URL` during the build. Zotero credentials stay in the separate server; never add keys to frontend or GitHub Pages build variables. The API must allow origin `https://abbyabbyzzz.github.io`.
 
 ## Manage the API locally
