@@ -6,9 +6,7 @@ A React + Vite + TypeScript frontend MVP. React Router manages the catalogue and
 
 Requires Node.js 20.19+ or 22.12+ and npm.
 
-**Windows quick start:** double-click `启动网站.cmd`. It starts Vite and opens the library in your browser. Keep the command window open while using the site; closing it stops the local server. See `如何打开网站.txt` for Chinese instructions. The launcher can also run with `--no-open` when browser opening is not needed.
-
-Do not open the source `index.html` or `dist/index.html` directly with a `file://` URL. The source entry imports TypeScript/React modules, and the production app expects HTTP-served assets and client-side routes. Use the launcher or the commands below.
+Do not open the source `index.html` or `dist/index.html` directly with a `file://` URL. The source entry imports TypeScript/React modules, and the production app expects HTTP-served assets and client-side routes. Use the commands below.
 
 ```sh
 npm install
@@ -36,10 +34,6 @@ The Pages source is **GitHub Actions**. Pushing to `main` runs tests, builds the
 For a matching local preview, run `npm run build:pages` followed by `npm run preview:pages`, then open the printed URL including `/xr-women-library/`.
 
 `ZOTERO_API_URL` is an optional GitHub repository Actions variable containing only the public catalogue endpoint. It becomes `VITE_ZOTERO_API_URL` during the build. Zotero credentials stay in the separate server; never add keys to frontend or GitHub Pages build variables. The API must allow origin `https://abbyabbyzzz.github.io`.
-
-## Manage the API locally
-
-Double-click **管理API.cmd**, or run `npm run manage-api`, to open the local management page on http://127.0.0.1:4190/. It checks the connection, reads collection status, saves the public API endpoint, and starts/monitors a GitHub Pages publish. See `tools/api-manager/README.md` for setup and details. Local settings and credentials are not committed.
 
 ## Pages and interactions
 

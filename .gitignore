@@ -11,3 +11,8 @@ qa/
 AGENTS.md
 PROJECT_MEMORY.md
 *_VALIDATION.md
+/启动网站.cmd
+/如何打开网站.txt
+/管理API.cmd
+/tools/api-manager/
+/tests/api-manager.test.mjs
