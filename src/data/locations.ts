@@ -10,7 +10,9 @@ export type FrameLocation = {
 };
 
 export const virtualLibrary: Pick<FrameLocation, 'worldUrl' | 'worldUrlVerified'> = {};
-export const paperLocations: Record<string, FrameLocation | undefined> = {};
+export const paperLocations: Record<string, FrameLocation | undefined> = {
+  '1': { description: 'Click on the Article 01 tag.' },
+};
 
 // Do not accept a DOI, arbitrary host, or non-HTTPS URL as a virtual destination.
 export function verifiedFrameUrl(value: string | undefined, verified: boolean | undefined): string | undefined {

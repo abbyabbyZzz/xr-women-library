@@ -3,3 +3,11 @@ dist/
 .local/
 *.tsbuildinfo
 qa/
+.env
+.env.*
+!.env.example
+*.log
+.impeccable/
+AGENTS.md
+PROJECT_MEMORY.md
+*_VALIDATION.md
