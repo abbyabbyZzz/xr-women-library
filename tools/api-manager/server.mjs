@@ -118,14 +118,25 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const portIndex = process.argv.indexOf('--port');
   const port = portIndex >= 0 ? Number(process.argv[portIndex + 1]) : 4190;
   const server = createManager();
+  const openBrowser = url => {
+    if (process.argv.includes('--open') && process.platform === 'win32') spawn('explorer.exe', [url], { windowsHide: true, detached: true, stdio: 'ignore' }).unref();
+  };
   server.on('error', async error => {
-    if (error.code === 'EADDRINUSE') console.error(`端口 ${port} 已在使用。请检查已打开的管理器，或使用 --port 指定另一个端口。`);
-    else console.error('本地管理器无法启动。');
+    if (error.code === 'EADDRINUSE') {
+      const url = `http://127.0.0.1:${port}/`;
+      const existing = await fetch(`${url}manager/session`, { signal: AbortSignal.timeout(2000) }).then(response => response.ok ? response.json() : null).catch(() => null);
+      if (existing?.repository === repository && existing?.pagesUrl === pagesUrl && typeof existing?.token === 'string') {
+        console.log(`管理器已经在运行：${url}`);
+        openBrowser(url);
+        return;
+      }
+      console.error(`端口 ${port} 已被其他程序使用，请使用 --port 指定另一个端口。`);
+    } else console.error('本地管理器无法启动。');
     process.exitCode = 1;
   });
   server.listen(port, '127.0.0.1', () => {
     const url = `http://127.0.0.1:${port}/`;
     console.log(`XR Women API 管理器：${url}\n只在本机开放。关闭此窗口或页面中的“关闭管理器”即可停止。`);
-    if (process.argv.includes('--open') && process.platform === 'win32') spawn('explorer.exe', [url], { windowsHide: true, detached: true, stdio: 'ignore' }).unref();
+    openBrowser(url);
   });
 }

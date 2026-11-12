@@ -13,4 +13,4 @@
 
 Zotero 密钥和原 Zotero API 的运行变量继续在原托管服务中维护；管理器显示健康检查结果，不读取密钥。替换 API 服务时，需让新 API 允许网站 origin `https://abbyabbyzzz.github.io`。管理器不会更改 Zotero 论文或上线 `/api/graph`。
 
-若 GitHub 连接失效，先用 Git Credential Manager 登录自己的账号，再刷新管理页。若端口已占用，可打开已运行的管理页，或运行 `node tools/api-manager/server.mjs --port 4191 --open`。不要把这个管理服务部署为公开网站。
+若 GitHub 连接失效，先用 Git Credential Manager 登录自己的账号，再刷新管理页。再次双击启动文件会打开已运行的同一管理器；若端口被其他程序占用，可运行 `node tools/api-manager/server.mjs --port 4191 --open`。不要把这个管理服务部署为公开网站。
